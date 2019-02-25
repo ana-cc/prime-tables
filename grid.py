@@ -1,14 +1,14 @@
 import math
 from eratosthenes import SieveOfEratosthenes
 
+
 class PrimeGrid():
-    # Class that models a rime multiplication table grid
+    # Class that models a prime multiplication table grid
     def __init__(self, grid_size):
         # initializes the table grid
         self.grid_size = grid_size
         self.edge = grid_size + 1
-        self.grid = [[None for x in range(self.edge)]
-                     for y in range(self.edge)]
+        self.grid = None
 
         # initializes sieve for this grid after finding the input that is required
         sieve_input = self.find_sieve_input(self.grid_size)
@@ -25,19 +25,24 @@ class PrimeGrid():
             limit = x / math.log(x) - 1
         return x
 
-    def display_grid(self):
+    def build_grid(self):
         results = [1]
         results.extend(self.sieve.get_results())
 
+        self.grid = [[None for x in range(self.edge)]
+                     for y in range(self.edge)]
         # to build the grid, start the inner loop from diagonal to reduce computations
         for i in range(0, self.edge):
             for j in range(i, self.edge):
                 self.grid[i][j] = self.grid[j][i] = (results[i] * results[j])
+        self.grid[0].pop(0)
 
+    def display_grid(self):
         # pretty printing for smaller grids, 5 digit padding and centered
-        print('\n'.join([
+        self.build_grid()
+        displaygrid = self.grid
+        displaygrid[0].insert(0, "")
+        return '\n'.join([
             '|'.join(['{:^5}'.format(item) for item in row])
-            for row in self.grid
-        ]))
-
-
+            for row in displaygrid
+        ])
