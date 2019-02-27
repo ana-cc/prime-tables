@@ -14,7 +14,7 @@ def main():
     n = input("Enter a grid size:")
     process(n)
     g = PrimeGrid(int(n))
-    print(g.display_grid())
+    g.display_grid()
 
 
 if __name__ == "__main__":

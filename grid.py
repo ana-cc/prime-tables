@@ -25,24 +25,13 @@ class PrimeGrid():
             primes = sieve_input / math.log(sieve_input) - 1
         return sieve_input
 
-    def build_grid(self):
+    def display_grid(self):
         results = [1]
         results.extend(self.sieve.get_results())
-
-        self.grid = [[None for x in range(self.edge)]
-                     for y in range(self.edge)]
-        # to build the grid, start the inner loop from diagonal to reduce computations
         for i in range(0, self.edge):
-            for j in range(i, self.edge):
-                self.grid[i][j] = self.grid[j][i] = (results[i] * results[j])
-        self.grid[0].pop(0)
-
-    def display_grid(self):
-        # pretty printing for smaller grids, 5 digit padding and centered
-        self.build_grid()
-        display_grid = self.grid
-        display_grid[0].insert(0, "")
-        return '\n'.join([
-            '|'.join(['{:^5}'.format(item) for item in row])
-            for row in display_grid
-        ])
+            li = []
+            for j in range(0, self.edge):
+                li.append(results[i] * results[j])
+            if i==0:
+                li[0] = ""
+            print('|'.join(['{:^5}'.format(item) for item in li]))
