@@ -11,10 +11,10 @@ class SieveOfEratosthenes():
 
     def sieve_primes(self):
         # for every True item in sieve, mark all its multiples in the sieve as False
-        for i in range(self.limit):
-            if self.sieve[i]:
-                for j in range(i + i, self.limit, i):
-                    self.sieve[j] = False
+        for item in range(self.limit):
+            if self.sieve[item]:
+                for multiple in range(item + item, self.limit, item):
+                    self.sieve[multiple] = False
 
     def get_results(self):
         # returns a list of all primes

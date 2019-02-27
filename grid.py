@@ -18,12 +18,12 @@ class PrimeGrid():
         # finds the upper input needed for the sieve to generate a required total number of primes
         # we approximate number of primes generated for a given input using function x/log(x) - 1
         # we test the input in increments of 1000
-        limit = 0
-        x = 0
-        while (limit < total_primes):
-            x += 1000
-            limit = x / math.log(x) - 1
-        return x
+        primes = 0
+        sieve_input = 0
+        while (primes < total_primes):
+            sieve_input += 1000
+            primes = sieve_input / math.log(sieve_input) - 1
+        return sieve_input
 
     def build_grid(self):
         results = [1]
@@ -40,9 +40,9 @@ class PrimeGrid():
     def display_grid(self):
         # pretty printing for smaller grids, 5 digit padding and centered
         self.build_grid()
-        displaygrid = self.grid
-        displaygrid[0].insert(0, "")
+        display_grid = self.grid
+        display_grid[0].insert(0, "")
         return '\n'.join([
             '|'.join(['{:^5}'.format(item) for item in row])
-            for row in displaygrid
+            for row in display_grid
         ])
